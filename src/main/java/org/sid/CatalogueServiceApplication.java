@@ -3,6 +3,7 @@ package org.sid;
 import org.sid.dao.CategoryRepository;
 import org.sid.dao.ProductRepository;
 import org.sid.entities.Category;
+import org.sid.entities.Product;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,8 +28,28 @@ public class   CatalogueServiceApplication {
             });
             categoryRepository.findAll().forEach(System.out::println);
 
+            productRepository.deleteAll();
+            Category c1 = categoryRepository.findById("C1").get();
+            Stream.of("P1", "P2", "P3", "P4").forEach(name ->{
+                Product product = productRepository.save(new Product(null, name, Math.random() * 1000, c1));
+                c1.getProducts().add(product);
+                categoryRepository.save(c1);
+            });
+
+            Category c2 = categoryRepository.findById("C2").get();
+            Stream.of("P5", "P6").forEach(name ->{
+                Product product = productRepository.save(new Product(null, name, Math.random(), c2));
+                c2.getProducts().add(product);
+                categoryRepository.save(c2);
+            });
+
+            productRepository.findAll().forEach(p->{
+                System.out.println(p.toString());
+            });
+
         };
     }
 
 
 }
+
