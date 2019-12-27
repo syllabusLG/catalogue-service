@@ -22,7 +22,7 @@ public class   CatalogueServiceApplication {
     @Bean
     CommandLineRunner start(CategoryRepository categoryRepository, ProductRepository productRepository){
         return args -> {
-            categoryRepository.deleteAll();
+           categoryRepository.deleteAll();
             Stream.of("C1 Ordinateurs", "C2 Imprimantes").forEach(c->{
                 categoryRepository.save(new Category(c.split(" ")[0], c.split(" ")[1], new ArrayList<>()));
             });
@@ -33,7 +33,7 @@ public class   CatalogueServiceApplication {
             Stream.of("P1", "P2", "P3", "P4").forEach(name ->{
                 Product product = productRepository.save(new Product(null, name, Math.random() * 1000, c1));
                 c1.getProducts().add(product);
-                categoryRepository.save(c1);
+               categoryRepository.save(c1);
             });
 
             Category c2 = categoryRepository.findById("C2").get();

@@ -12,16 +12,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Document
-@Data @NoArgsConstructor @AllArgsConstructor 
+
 public class Category {
     @Id
     private String id;
     private String name;
     @DBRef
     private Collection<Product> products = new ArrayList<>();
-	@Override
-	public String toString() {
-		return "Category [id=" + id + ", name=" + name + "]";
-	}
-    
+
+	
 }
