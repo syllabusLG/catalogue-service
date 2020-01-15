@@ -14,12 +14,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Override
+    /*@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         BCryptPasswordEncoder bcpe = getBCPE();
         auth.inMemoryAuthentication().withUser("admin").password(bcpe.encode("1234")).roles("ADMIN", "USER");
         auth.inMemoryAuthentication().withUser("user1").password(bcpe.encode("1234")).roles("USER");
-    }
+    }*/
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -32,8 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
-    @Bean
+   /* @Bean
     public BCryptPasswordEncoder getBCPE(){
         return  new BCryptPasswordEncoder();
-    }
+    }*/
 }
